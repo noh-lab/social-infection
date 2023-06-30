@@ -3,6 +3,7 @@ library(lme4)
 library(parameters)
 library(effectsize)
 library(ggplot2)
+library(emmeans)
 
 manuscript_theme = ggplot2::theme_bw() + ggplot2::theme(axis.line.x = element_line(color="black", size = .7),axis.line.y = element_line(color="black", size = .7),text=element_text(size=11))
 
@@ -39,6 +40,7 @@ plot(fitted(fitness.2), residuals(fitness.2))
 
 epsilon_squared(fitness.2)
 
+emtrends(fitness.2, pairwise ~ symbiont, var = "flow_infected", adjust = "tukey")
 
 # visualize effect of symbiont, and lack of effect of host type
 # full factorial design
@@ -86,6 +88,7 @@ plot(fitted(transmit.2), residuals(transmit.2))
 
 epsilon_squared(transmit.2)
 
+emtrends(transmit.2, pairwise ~ symbiont, var = "flow_infected", adjust = "tukey")
 
 # visualize effect of symbiont, and lack of effect of host type
 # full factorial design
@@ -174,17 +177,19 @@ plot(fitted(round), residuals(round))
 epsilon_squared(round)
 
 
-postscript(file=paste("fig3",format(Sys.time(),"%Y%m%d"),"eps",sep="."),onefile=F, width=6, height=4)
+postscript(file=paste("fig3",format(Sys.time(),"%Y%m%d"),"eps",sep="."),onefile=F, width=5, height=3.5)
 ggplot(spore, aes(x=flow_infected, y=percent_spore, fill=symbiont, shape=type)) +geom_point(size=1.5) + scale_shape_manual(values=c(21, 22, 23)) + geom_smooth(method = "lm", se=FALSE, aes(group=symbiont, color=symbiont)) + facet_grid(type~symbiont) + ylab("Host fitness") + xlab("Infection prevalence") + manuscript_theme
 dev.off()
 
 
-postscript(file=paste("fig4",format(Sys.time(),"%Y%m%d"),"eps",sep="."),onefile=F, width=6, height=4)
+postscript(file=paste("fig4",format(Sys.time(),"%Y%m%d"),"eps",sep="."),onefile=F, width=5, height=3.5)
 ggplot(horiz, aes(x=flow_infected, y=transmission, fill=symbiont, shape=type)) +geom_point(size=1.5) + scale_shape_manual(values=c(21, 22, 23)) + geom_smooth(method = "lm", se=FALSE, aes(group=symbiont, color=symbiont)) + facet_grid(type~symbiont) + ylab("Horizontal transmission") + xlab("Infection prevalence") + manuscript_theme
 dev.off()
 
-postscript(file=paste("fig5",format(Sys.time(),"%Y%m%d"),"eps",sep="."),onefile=F, width=8, height=3)
+postscript(file=paste("fig5",format(Sys.time(),"%Y%m%d"),"eps",sep="."),onefile=F, width=6.5, height=2.5)
 grid.arrange(r1, r2, ncol=2)
 dev.off()
 
 
+
+# post-hoc test reference: https://cran.r-project.org/web/packages/emmeans/vignettes/interactions.html

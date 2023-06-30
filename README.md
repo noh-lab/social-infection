@@ -8,3 +8,4 @@ It contains:
 * Two text format data files, one for the host fitness experiment and another for the symbiont transmission experiment.
 * GFF files for the three *P. bonniea* genomes
 * Code for how the GFF files were generated and used    
+* Protein sequences for the candidate virulence factors identified

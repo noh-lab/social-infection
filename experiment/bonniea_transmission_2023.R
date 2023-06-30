@@ -176,6 +176,8 @@ plot(fitted(round), residuals(round))
 
 epsilon_squared(round)
 
+emmeans(round, pairwise ~ symbiont | stage, adjust = "tukey")
+
 
 postscript(file=paste("fig3",format(Sys.time(),"%Y%m%d"),"eps",sep="."),onefile=F, width=5, height=3.5)
 ggplot(spore, aes(x=flow_infected, y=percent_spore, fill=symbiont, shape=type)) +geom_point(size=1.5) + scale_shape_manual(values=c(21, 22, 23)) + geom_smooth(method = "lm", se=FALSE, aes(group=symbiont, color=symbiont)) + facet_grid(type~symbiont) + ylab("Host fitness") + xlab("Infection prevalence") + manuscript_theme

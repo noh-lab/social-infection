@@ -1,6 +1,6 @@
 # social-infection
 
-This repository supports the manuscript with working title: Paraburkholderia bonniea symbiont strain identity impacts amoeba host fitness and rate of horizontal transmission.
+This repository supports [Facultative symbiont virulence determines horizontal transmission rate without host strain specificity in _Dictyostelium discoideum_ social amoebas](https://doi.org/10.1093/evlett/qrae001)
 
 It contains two directories:
 
